@@ -6,7 +6,6 @@ import torch
 import torch.nn as nn
 from mmcv.cnn import ConvModule, build_norm_layer
 from mmcv.cnn.bricks.transformer import BaseTransformerLayer
-from mmcv.ops import point_sample
 from mmengine.dist import all_reduce
 from mmengine.model.weight_init import (caffe2_xavier_init, normal_init,
                                         trunc_normal_)
@@ -14,6 +13,13 @@ from mmengine.runner.checkpoint import CheckpointLoader, load_state_dict
 from mmengine.structures import InstanceData
 from torch import Tensor
 from torch.nn import functional as F
+
+try:
+    from mmcv.ops import point_sample
+except ModuleNotFoundError as error:
+    if error.name != 'mmcv._ext':
+        raise
+    point_sample = None
 
 from mmseg.models.backbones.vit import TransformerEncoderLayer
 from mmseg.registry import MODELS

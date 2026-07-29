@@ -1,7 +1,28 @@
 # Copyright (c) OpenMMLab. All rights reserved.
 import torch
-from mmcv.ops import point_sample
+import torch.nn.functional as F
 from torch import Tensor
+
+
+try:
+    from mmcv.ops import point_sample
+except ModuleNotFoundError as error:
+    if error.name != 'mmcv._ext':
+        raise
+
+    def point_sample(input, points, align_corners=False, **kwargs):
+        """Pure-PyTorch equivalent of ``mmcv.ops.point_sample``."""
+        add_dimension = points.dim() == 3
+        if add_dimension:
+            points = points.unsqueeze(2)
+        output = F.grid_sample(
+            input,
+            2.0 * points - 1.0,
+            align_corners=align_corners,
+            **kwargs)
+        if add_dimension:
+            output = output.squeeze(3)
+        return output
 
 
 def get_uncertainty(mask_preds: Tensor, labels: Tensor) -> Tensor:

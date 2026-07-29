@@ -21,7 +21,18 @@ from .typing_utils import (ConfigType, ForwardResults, MultiConfig,
                            SampleList, TensorDict, TensorList)
 
 # isort: off
-from .mask_classification import MatchMasks, seg_data_to_instance_data
+try:
+    from .mask_classification import MatchMasks, seg_data_to_instance_data
+except ModuleNotFoundError as error:
+    if error.name != 'mmcv._ext':
+        raise
+
+    MatchMasks = None
+
+    def seg_data_to_instance_data(*args, **kwargs):
+        raise RuntimeError(
+            'Mask-classification helpers require compiled mmcv operators. '
+            'Install full mmcv to use Mask2Former/SAN models.')
 
 __all__ = [
     'collect_env',

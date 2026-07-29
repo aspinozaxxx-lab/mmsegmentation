@@ -3,7 +3,40 @@
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-from mmcv.ops import sigmoid_focal_loss as _sigmoid_focal_loss
+
+try:
+    from mmcv.ops import sigmoid_focal_loss as _sigmoid_focal_loss
+except ModuleNotFoundError as error:
+    if error.name != 'mmcv._ext':
+        raise
+
+    def _sigmoid_focal_loss(pred,
+                            target,
+                            gamma,
+                            alpha,
+                            weight=None,
+                            reduction='mean'):
+        """Pure-PyTorch fallback used when mmcv was installed without ops."""
+        one_hot = F.one_hot(
+            target.long(), num_classes=pred.size(1) + 1
+        )[:, :pred.size(1)].type_as(pred)
+        probability = pred.sigmoid()
+        cross_entropy = F.binary_cross_entropy_with_logits(
+            pred, one_hot, reduction='none')
+        probability_target = (
+            probability * one_hot + (1 - probability) * (1 - one_hot))
+        alpha_target = alpha * one_hot + (1 - alpha) * (1 - one_hot)
+        loss = (
+            cross_entropy
+            * (1 - probability_target).pow(gamma)
+            * alpha_target)
+        if weight is not None:
+            loss = loss * weight
+        if reduction == 'sum':
+            return loss.sum()
+        if reduction == 'mean':
+            return loss.mean()
+        return loss
 
 from mmseg.registry import MODELS
 from .utils import weight_reduce_loss
