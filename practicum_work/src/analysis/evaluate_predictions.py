@@ -125,7 +125,10 @@ def draw_confusion_matrix(
 
 
 def evaluate(
-    labels_dir: Path, predictions_dir: Path, output_dir: Path
+    labels_dir: Path,
+    predictions_dir: Path,
+    output_dir: Path,
+    checkpoint_iteration: int | None = None,
 ) -> dict:
     output_dir.mkdir(parents=True, exist_ok=True)
     label_paths = sorted(labels_dir.glob("*.png"))
@@ -163,6 +166,8 @@ def evaluate(
 
     metrics = metrics_from_confusion(confusion)
     metrics["samples"] = len(sample_rows)
+    if checkpoint_iteration is not None:
+        metrics["checkpoint_iteration"] = checkpoint_iteration
     with (output_dir / "metrics.json").open(
         "w", encoding="utf-8", newline="\n"
     ) as stream:
@@ -185,12 +190,18 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--labels", type=Path, required=True)
     parser.add_argument("--predictions", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
+    parser.add_argument("--checkpoint-iteration", type=int)
     return parser.parse_args()
 
 
 def main() -> None:
     args = parse_args()
-    metrics = evaluate(args.labels, args.predictions, args.output)
+    metrics = evaluate(
+        args.labels,
+        args.predictions,
+        args.output,
+        args.checkpoint_iteration,
+    )
     print(json.dumps(metrics, ensure_ascii=False, indent=2))
 
 
