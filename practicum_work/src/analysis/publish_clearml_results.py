@@ -78,6 +78,11 @@ def publish(
     task.flush(wait_for_uploads=False)
     if mark_completed or was_completed:
         task.mark_completed()
+    # ``Task.get_task(...).mark_started()`` starts ClearML's asynchronous
+    # repository/package detector even though provenance is supplied above.
+    # Stop that optional detector so interpreter shutdown does not wait for
+    # its five-minute timeout after all requested uploads have completed.
+    task._wait_for_repo_detection(timeout=-1)
 
 
 def parse_args() -> argparse.Namespace:
