@@ -24,7 +24,9 @@ vis_backends = [
         type='ClearMLVisBackend',
         init_kwargs=dict(
             project_name='Practicum/Sprint6-mmsegmentation',
-            task_name='03_exp_mitb0_ce_dice'),
+            task_name='03_exp_mitb0_ce_dice',
+            auto_connect_frameworks=False,
+            auto_connect_arg_parser=False),
         artifact_suffix=('.py', '.json', '.csv'))
 ]
 visualizer = dict(
