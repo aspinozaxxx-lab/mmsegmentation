@@ -25,4 +25,6 @@ RUN python -m pip install --upgrade "pip==25.1.1" && \
       "ftfy==6.3.1" \
       "regex==2024.11.6"
 
+ENV CUBLAS_WORKSPACE_CONFIG=:4096:8
+
 WORKDIR /workspace/repo
