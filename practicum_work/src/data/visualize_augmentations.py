@@ -11,6 +11,8 @@ from mmengine.config import Config
 from mmengine.dataset import Compose
 from PIL import Image, ImageDraw
 
+from mmseg.utils import register_all_modules
+
 
 COLORS = np.asarray(
     [(35, 35, 35), (240, 70, 70), (65, 135, 245)], dtype=np.uint8
@@ -35,6 +37,7 @@ def render(
 ) -> None:
     random.seed(seed)
     np.random.seed(seed)
+    register_all_modules(init_default_scope=True)
     cfg = Config.fromfile(str(config_path))
     pipeline = Compose(
         [
