@@ -183,8 +183,11 @@ class IoUMetric(BaseMetric):
         """
 
         mask = (label != ignore_index)
-        pred_label = pred_label[mask]
-        label = label[mask]
+        # CUDA ``histc`` has no deterministic implementation in PyTorch 2.7.
+        # Metric accumulation is small and does not need the GPU, so move the
+        # flattened valid labels to CPU before building the histograms.
+        pred_label = pred_label[mask].cpu()
+        label = label[mask].cpu()
 
         intersect = pred_label[pred_label == label]
         area_intersect = torch.histc(

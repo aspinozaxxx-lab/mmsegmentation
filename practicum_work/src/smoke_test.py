@@ -31,6 +31,9 @@ def run_single_update(config_path: Path, work_dir: Path) -> None:
     cfg.work_dir = str(work_dir)
     cfg.train_cfg.max_iters = 1
     cfg.train_cfg.val_interval = 2
+    cfg.val_cfg = None
+    cfg.val_dataloader = None
+    cfg.val_evaluator = None
     cfg.train_dataloader.batch_size = 1
     cfg.train_dataloader.num_workers = 0
     cfg.train_dataloader.persistent_workers = False
