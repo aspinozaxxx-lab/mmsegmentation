@@ -21,6 +21,8 @@ RUN python -m pip install --upgrade "pip==25.1.1" && \
       "scipy==1.15.3" \
       "mmcv-lite==2.1.0" \
       "mmengine==0.10.7" \
-      "clearml==2.1.10"
+      "clearml==2.1.10" \
+      "ftfy==6.3.1" \
+      "regex==2024.11.6"
 
 WORKDIR /workspace/repo
