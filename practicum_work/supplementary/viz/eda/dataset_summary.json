@@ -34,6 +34,16 @@
     "median": 0.0876617431640625,
     "max": 0.3590087890625
   },
+  "component_count": {
+    "min": 1,
+    "median": 1.0,
+    "max": 17
+  },
+  "bbox_scale": {
+    "min": 0.01953125,
+    "median": 0.4177388060366098,
+    "max": 0.702495377820648
+  },
   "exact_duplicate_groups": [
     [
       "train/000000481212_908.jpg",
@@ -45,6 +55,7 @@
     "train-test": [],
     "val-test": []
   },
+  "cross_split_dhash_distance_le_5": [],
   "quality_findings": [
     {
       "stem": "000000028253_7169",

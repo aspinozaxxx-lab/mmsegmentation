@@ -50,10 +50,11 @@ def main() -> None:
     cfg.work_dir = str(args.work_dir)
     runner = Runner.from_cfg(cfg)
     metrics = runner.test()
-    (args.work_dir / "runner_metrics.json").write_text(
-        json.dumps(metrics, ensure_ascii=False, indent=2),
-        encoding="utf-8",
-    )
+    with (args.work_dir / "runner_metrics.json").open(
+        "w", encoding="utf-8", newline="\n"
+    ) as stream:
+        json.dump(metrics, stream, ensure_ascii=False, indent=2)
+        stream.write("\n")
     print(json.dumps(metrics, ensure_ascii=False, indent=2))
 
 

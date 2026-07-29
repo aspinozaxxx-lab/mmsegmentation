@@ -163,14 +163,17 @@ def evaluate(
 
     metrics = metrics_from_confusion(confusion)
     metrics["samples"] = len(sample_rows)
-    (output_dir / "metrics.json").write_text(
-        json.dumps(metrics, ensure_ascii=False, indent=2),
-        encoding="utf-8",
-    )
+    with (output_dir / "metrics.json").open(
+        "w", encoding="utf-8", newline="\n"
+    ) as stream:
+        json.dump(metrics, stream, ensure_ascii=False, indent=2)
+        stream.write("\n")
     with (output_dir / "sample_metrics.csv").open(
         "w", newline="", encoding="utf-8"
     ) as stream:
-        writer = csv.DictWriter(stream, fieldnames=list(sample_rows[0]))
+        writer = csv.DictWriter(
+            stream, fieldnames=list(sample_rows[0]), lineterminator="\n"
+        )
         writer.writeheader()
         writer.writerows(sample_rows)
     draw_confusion_matrix(confusion, output_dir / "confusion_matrix.png")

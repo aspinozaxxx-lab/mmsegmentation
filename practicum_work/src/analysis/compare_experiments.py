@@ -84,7 +84,9 @@ def save_outputs(experiments: list[Experiment], output_dir: Path) -> None:
     with (output_dir / "validation_experiments.csv").open(
         "w", newline="", encoding="utf-8"
     ) as stream:
-        writer = csv.DictWriter(stream, fieldnames=list(rows[0]))
+        writer = csv.DictWriter(
+            stream, fieldnames=list(rows[0]), lineterminator="\n"
+        )
         writer.writeheader()
         writer.writerows(rows)
     payload = {
@@ -93,10 +95,11 @@ def save_outputs(experiments: list[Experiment], output_dir: Path) -> None:
         "selected": ranked[0].name,
         "experiments": rows,
     }
-    (output_dir / "validation_selection.json").write_text(
-        json.dumps(payload, ensure_ascii=False, indent=2),
-        encoding="utf-8",
-    )
+    with (output_dir / "validation_selection.json").open(
+        "w", encoding="utf-8", newline="\n"
+    ) as stream:
+        json.dump(payload, stream, ensure_ascii=False, indent=2)
+        stream.write("\n")
 
     labels = [item.name for item in ranked]
     positions = range(len(ranked))

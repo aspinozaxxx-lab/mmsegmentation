@@ -35,12 +35,23 @@
     "median": 0.08879852294921875,
     "max": 0.3590087890625
   },
+  "component_count": {
+    "min": 1,
+    "median": 1.0,
+    "max": 17
+  },
+  "bbox_scale": {
+    "min": 0.0855816496101822,
+    "median": 0.4215307786430824,
+    "max": 0.702495377820648
+  },
   "exact_duplicate_groups": [],
   "cross_split_base_id_overlap": {
     "train-val": [],
     "train-test": [],
     "val-test": []
   },
+  "cross_split_dhash_distance_le_5": [],
   "quality_findings": [
     {
       "stem": "000000481212_908",

@@ -136,10 +136,11 @@ def main() -> None:
         "git_sha": args.git_sha,
     }
     args.work_dir.mkdir(parents=True, exist_ok=True)
-    (args.work_dir / "smoke_result.json").write_text(
-        json.dumps(result, ensure_ascii=False, indent=2),
-        encoding="utf-8",
-    )
+    with (args.work_dir / "smoke_result.json").open(
+        "w", encoding="utf-8", newline="\n"
+    ) as stream:
+        json.dump(result, stream, ensure_ascii=False, indent=2)
+        stream.write("\n")
     print(json.dumps(result, ensure_ascii=False, indent=2))
 
 
