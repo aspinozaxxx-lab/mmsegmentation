@@ -1,0 +1,81 @@
+{
+  "schema_version": 1,
+  "input_root": "train_dataset_for_students",
+  "output_root": "train_dataset_cleaned",
+  "classes": {
+    "0": "background",
+    "1": "cat",
+    "2": "dog"
+  },
+  "ignore_index": 255,
+  "raw_counts": {
+    "train": 200,
+    "val": 120,
+    "test": 120
+  },
+  "clean_counts": {
+    "train": 194,
+    "val": 120,
+    "test": 120
+  },
+  "removed": [
+    {
+      "stem": "000000028253_7169",
+      "foreground_pixels": 17,
+      "reason": "broken contour fragments"
+    },
+    {
+      "stem": "000000574769_0",
+      "foreground_pixels": 52,
+      "reason": "broken contour fragments"
+    },
+    {
+      "stem": "000000121530_5761",
+      "foreground_pixels": 86,
+      "reason": "broken contour fragments"
+    },
+    {
+      "stem": "000000275919_4499",
+      "foreground_pixels": 116,
+      "reason": "broken contour fragments"
+    },
+    {
+      "stem": "000000247301_4455",
+      "foreground_pixels": 201,
+      "reason": "broken contour fragments"
+    }
+  ],
+  "merge": {
+    "target_stem": "000000481212_908",
+    "source_stem": "000000481212_908_1",
+    "images_identical": true,
+    "overlap_policy": "set conflicting pixels to ignore_index",
+    "conflicting_pixels": 35
+  },
+  "train_valid_pixel_counts": {
+    "background": 11516117,
+    "cat": 652778,
+    "dog": 545054
+  },
+  "train_valid_pixel_percent": {
+    "background": 90.5786,
+    "cat": 5.134345,
+    "dog": 4.287055
+  },
+  "train_ignored_pixels": 35,
+  "val_test_sha256_unchanged": true,
+  "val_test_sha256_manifest": {
+    "files": 480,
+    "before": "e7ccda14e72d45c9abdf563b2e84d708661c41e2c702a490a4b5ddb73262280d",
+    "after": "e7ccda14e72d45c9abdf563b2e84d708661c41e2c702a490a4b5ddb73262280d"
+  },
+  "class_presence": {
+    "test|1": 60,
+    "test|2": 60,
+    "train|1": 95,
+    "train|1|2": 1,
+    "train|2": 98,
+    "val|1": 60,
+    "val|2": 60
+  }
+}

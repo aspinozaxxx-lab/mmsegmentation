@@ -1,0 +1,85 @@
+{
+  "root": "train_dataset_for_students",
+  "split_counts": {
+    "train": 200,
+    "val": 120,
+    "test": 120
+  },
+  "image_sizes": [
+    [
+      256,
+      256
+    ]
+  ],
+  "pixel_counts": {
+    "background": 25984601,
+    "cat": 1625365,
+    "dog": 1225874
+  },
+  "pixel_percent": {
+    "background": 90.11216943914239,
+    "cat": 5.636614019220525,
+    "dog": 4.251216541637074
+  },
+  "class_presence": {
+    "test|cat": 60,
+    "test|dog": 60,
+    "train|cat": 100,
+    "train|dog": 100,
+    "val|cat": 60,
+    "val|dog": 60
+  },
+  "foreground_fraction": {
+    "min": 0.0002593994140625,
+    "median": 0.0876617431640625,
+    "max": 0.3590087890625
+  },
+  "exact_duplicate_groups": [
+    [
+      "train/000000481212_908.jpg",
+      "train/000000481212_908_1.jpg"
+    ]
+  ],
+  "cross_split_base_id_overlap": {
+    "train-val": [],
+    "train-test": [],
+    "val-test": []
+  },
+  "quality_findings": [
+    {
+      "stem": "000000028253_7169",
+      "status": "remove_broken_mask",
+      "foreground_pixels": 17
+    },
+    {
+      "stem": "000000121530_5761",
+      "status": "remove_broken_mask",
+      "foreground_pixels": 86
+    },
+    {
+      "stem": "000000247301_4455",
+      "status": "remove_broken_mask",
+      "foreground_pixels": 201
+    },
+    {
+      "stem": "000000275919_4499",
+      "status": "remove_broken_mask",
+      "foreground_pixels": 116
+    },
+    {
+      "stem": "000000481212_908",
+      "status": "merge_duplicate",
+      "foreground_pixels": 4631
+    },
+    {
+      "stem": "000000481212_908_1",
+      "status": "merge_duplicate",
+      "foreground_pixels": 8584
+    },
+    {
+      "stem": "000000574769_0",
+      "status": "remove_broken_mask",
+      "foreground_pixels": 52
+    }
+  ]
+}

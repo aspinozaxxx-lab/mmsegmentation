@@ -118,3 +118,14 @@ mmseg/.mim
 
 # Pytorch
 *.pth
+
+# Practicum Sprint 6 local/server-only data and credentials
+train_dataset_for_students/
+train_dataset_cleaned/
+practicum_work/results/raw/
+practicum_work/results/predictions/
+practicum_work/results/checkpoints/
+practicum_work/results/clearml_credentials.json
+practicum_work/results/*.zip
+practicum_work/.secrets/
+*.env

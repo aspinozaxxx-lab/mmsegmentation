@@ -1,0 +1,9 @@
+pytorch/pytorch:2.7.1-cuda12.8-cudnn9-devel
+torch==2.7.1
+mmsegmentation==1.2.2+fork@b040e147adfa027bbc071b624bedf0ae84dfc922
+mmcv-lite==2.1.0
+mmengine==0.10.7
+clearml==2.1.10
+numpy==1.26.4
+matplotlib==3.10.3
+scipy==1.15.3

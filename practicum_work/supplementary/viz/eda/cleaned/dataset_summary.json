@@ -1,0 +1,51 @@
+{
+  "root": "train_dataset_cleaned",
+  "split_counts": {
+    "train": 194,
+    "val": 120,
+    "test": 120
+  },
+  "image_sizes": [
+    [
+      256,
+      256
+    ]
+  ],
+  "pixel_counts": {
+    "background": 25591892,
+    "cat": 1624875,
+    "dog": 1225822
+  },
+  "pixel_percent": {
+    "background": 89.97736457816833,
+    "cat": 5.712823822050798,
+    "dog": 4.309811599780878
+  },
+  "class_presence": {
+    "test|cat": 60,
+    "test|dog": 60,
+    "train|cat": 95,
+    "train|cat,dog": 1,
+    "train|dog": 98,
+    "val|cat": 60,
+    "val|dog": 60
+  },
+  "foreground_fraction": {
+    "min": 0.0050811767578125,
+    "median": 0.08879852294921875,
+    "max": 0.3590087890625
+  },
+  "exact_duplicate_groups": [],
+  "cross_split_base_id_overlap": {
+    "train-val": [],
+    "train-test": [],
+    "val-test": []
+  },
+  "quality_findings": [
+    {
+      "stem": "000000481212_908",
+      "status": "merge_duplicate",
+      "foreground_pixels": 13145
+    }
+  ]
+}
