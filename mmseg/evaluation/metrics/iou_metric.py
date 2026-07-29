@@ -143,6 +143,18 @@ class IoUMetric(BaseMetric):
             else:
                 metrics['m' + key] = val
 
+        # Keep the standard aggregate names and expose class/foreground Dice
+        # as additional scalar series for experiment tracking.
+        if 'Dice' in ret_metrics:
+            dice_values = np.asarray(ret_metrics['Dice'])
+            for class_name, value in zip(class_names, dice_values):
+                metrics[f'Dice/{class_name}'] = np.round(value * 100, 2)
+            foreground = dice_values[1:]
+            metrics['foreground_mDice'] = np.round(
+                np.nanmean(foreground) * 100, 2)
+            metrics['worst_foreground_Dice'] = np.round(
+                np.nanmin(foreground) * 100, 2)
+
         # each class table
         ret_metrics.pop('aAcc', None)
         ret_metrics_class = OrderedDict({
