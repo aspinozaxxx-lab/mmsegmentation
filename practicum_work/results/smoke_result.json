@@ -1,0 +1,26 @@
+{
+  "torch": "2.7.1+cu128",
+  "cuda": "12.8",
+  "gpu": "NVIDIA GeForce RTX 5090",
+  "compute_capability": [
+    12,
+    0
+  ],
+  "mmcv": "2.1.0",
+  "mmengine": "0.10.7",
+  "mmseg": "1.2.2",
+  "parsed_configs": [
+    "practicum_work/configs/baseline_fcn_r50.py",
+    "practicum_work/configs/baseline_segformer_mitb0.py",
+    "practicum_work/configs/exp01_mitb0_ce_dice.py",
+    "practicum_work/configs/exp02_mitb0_strong_aug.py",
+    "practicum_work/configs/exp03_mitb2_strong_aug.py",
+    "practicum_work/configs/exp04_mitb2_long_finetune.py",
+    "practicum_work/configs/exp04_mitb2_tta.py",
+    "practicum_work/configs/final_test_mitb2.py"
+  ],
+  "forward_backward": "ok",
+  "finite_parameters": true,
+  "clearml_task_id": "50c51111c7dd47cc8f402fe84c520b7a",
+  "git_sha": "2e07308d0a228eb0912ce6da653ff937c6b9a729"
+}
