@@ -29,6 +29,9 @@ def publish(
 ) -> None:
     metrics = json.loads(metrics_path.read_text(encoding="utf-8"))
     task = Task.get_task(task_id=task_id)
+    was_completed = str(task.get_status()).lower().endswith("completed")
+    if was_completed:
+        task.mark_started(force=True)
     task.set_parameter("provenance/git_sha", git_sha)
     task.set_parameter("provenance/config", config_path.as_posix())
     task.set_parameter("evaluation/selection_split", split)
@@ -68,7 +71,7 @@ def publish(
             raise FileNotFoundError(path)
         task.upload_artifact(name=name, artifact_object=path)
     task.flush(wait_for_uploads=True)
-    if mark_completed:
+    if mark_completed or was_completed:
         task.mark_completed()
 
 
