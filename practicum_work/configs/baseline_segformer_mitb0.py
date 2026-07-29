@@ -39,7 +39,7 @@ vis_backends = [
         init_kwargs=dict(
             project_name='Practicum/Sprint6-mmsegmentation',
             task_name='02_baseline_segformer_mitb0'),
-        artifact_suffix=('.py', '.pth', '.json', '.csv'))
+        artifact_suffix=('.py', '.json', '.csv'))
 ]
 visualizer = dict(
     type='SegLocalVisualizer',

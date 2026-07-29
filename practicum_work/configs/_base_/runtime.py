@@ -17,7 +17,7 @@ default_hooks = dict(
         interval=250,
         save_best='mDice',
         rule='greater',
-        max_keep_ckpts=2),
+        max_keep_ckpts=1),
     sampler_seed=dict(type='DistSamplerSeedHook'),
     visualization=dict(
         type='SegVisualizationHook', draw=False, interval=1))

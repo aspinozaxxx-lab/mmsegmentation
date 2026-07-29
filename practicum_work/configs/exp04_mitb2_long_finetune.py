@@ -29,7 +29,7 @@ vis_backends = [
         init_kwargs=dict(
             project_name='Practicum/Sprint6-mmsegmentation',
             task_name='06_exp_mitb2_long_finetune'),
-        artifact_suffix=('.py', '.pth', '.json', '.csv'))
+        artifact_suffix=('.py', '.json', '.csv'))
 ]
 visualizer = dict(
     type='SegLocalVisualizer',
