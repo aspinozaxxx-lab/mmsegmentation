@@ -6,6 +6,12 @@ ENV DEBIAN_FRONTEND=noninteractive \
     PYTHONUNBUFFERED=1 \
     PYTHONPATH=/workspace/repo
 
+RUN apt-get update && \
+    apt-get install --yes --no-install-recommends \
+      libgl1 \
+      libglib2.0-0 && \
+    rm -rf /var/lib/apt/lists/*
+
 RUN python -m pip install --upgrade "pip==25.1.1" && \
     python -m pip install \
       "numpy==1.26.4" \
