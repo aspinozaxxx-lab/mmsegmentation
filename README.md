@@ -1,420 +1,545 @@
-<div align="center">
-  <img src="resources/mmseg-logo.png" width="600"/>
-  <div>&nbsp;</div>
-  <div align="center">
-    <b><font size="5">OpenMMLab website</font></b>
-    <sup>
-      <a href="https://openmmlab.com">
-        <i><font size="4">HOT</font></i>
-      </a>
-    </sup>
-    &nbsp;&nbsp;&nbsp;&nbsp;
-    <b><font size="5">OpenMMLab platform</font></b>
-    <sup>
-      <a href="https://platform.openmmlab.com">
-        <i><font size="4">TRY IT OUT</font></i>
-      </a>
-    </sup>
-  </div>
-  <div>&nbsp;</div>
+# Мультиклассовая семантическая сегментация кошек и собак
 
-[![PyPI - Python Version](https://img.shields.io/pypi/pyversions/mmsegmentation)](https://pypi.org/project/mmsegmentation/)
-[![PyPI](https://img.shields.io/pypi/v/mmsegmentation)](https://pypi.org/project/mmsegmentation)
-[![docs](https://img.shields.io/badge/docs-latest-blue)](https://mmsegmentation.readthedocs.io/en/latest/)
-[![badge](https://github.com/open-mmlab/mmsegmentation/workflows/build/badge.svg)](https://github.com/open-mmlab/mmsegmentation/actions)
-[![codecov](https://codecov.io/gh/open-mmlab/mmsegmentation/branch/master/graph/badge.svg)](https://codecov.io/gh/open-mmlab/mmsegmentation)
-[![license](https://img.shields.io/github/license/open-mmlab/mmsegmentation.svg)](https://github.com/open-mmlab/mmsegmentation/blob/main/LICENSE)
-[![issue resolution](https://isitmaintained.com/badge/resolution/open-mmlab/mmsegmentation.svg)](https://github.com/open-mmlab/mmsegmentation/issues)
-[![open issues](https://isitmaintained.com/badge/open/open-mmlab/mmsegmentation.svg)](https://github.com/open-mmlab/mmsegmentation/issues)
-[![Open in OpenXLab](https://cdn-static.openxlab.org.cn/app-center/openxlab_demo.svg)](https://openxlab.org.cn/apps?search=mmseg)
+Проект выполнен в публичном fork
+[`aspinozaxxx-lab/mmsegmentation`](https://github.com/aspinozaxxx-lab/mmsegmentation).
+Fork создан от актуального на момент старта `main` upstream
+[`open-mmlab/mmsegmentation`](https://github.com/open-mmlab/mmsegmentation);
+исходный commit — `b040e147adfa027bbc071b624bedf0ae84dfc922`.
+Каталог `practicum_work` является обычным каталогом внутри fork, а не Git
+submodule.
 
-Documentation: <https://mmsegmentation.readthedocs.io/en/latest/>
+Итог: выбранная строго по validation модель SegFormer MiT-B2 с TTA получила
+**mDice(test) = 0.9216629060 (92.17% в mmseg-логе)** при требовании `> 0.75`.
+Тестовая выборка была использована один раз после фиксации модели и режима
+инференса.
 
-English | [简体中文](README_zh-CN.md)
+| Итоговая test-метрика | Значение 0–1 | mmseg, % |
+|---|---:|---:|
+| mDice | **0.921663** | **92.17** |
+| foreground mDice | 0.886935 | 88.69 |
+| Dice background | 0.991118 | 99.11 |
+| Dice cat | 0.908828 | 90.88 |
+| Dice dog | 0.865043 | 86.50 |
+| mIoU | 0.859155 | 85.92 |
+| aAcc | 0.980799 | 98.08 |
 
-</div>
+Полные результаты находятся в
+[`practicum_work/results`](practicum_work/results), а машиночитаемый реестр
+конфигов, commit SHA, ClearML task ID и Share-ссылок — в
+[`experiments.json`](practicum_work/results/experiments.json).
 
-<div align="center">
-  <a href="https://openmmlab.medium.com/" style="text-decoration:none;">
-    <img src="https://user-images.githubusercontent.com/25839884/219255827-67c1a27f-f8c5-46a9-811d-5e57448c61d1.png" width="3%" alt="" /></a>
-  <img src="https://user-images.githubusercontent.com/25839884/218346358-56cc8e2f-a2b8-487f-9088-32480cceabcf.png" width="3%" alt="" />
-  <a href="https://discord.gg/raweFPmdzG" style="text-decoration:none;">
-    <img src="https://user-images.githubusercontent.com/25839884/218347213-c080267f-cbb6-443e-8532-8e1ed9a58ea9.png" width="3%" alt="" /></a>
-  <img src="https://user-images.githubusercontent.com/25839884/218346358-56cc8e2f-a2b8-487f-9088-32480cceabcf.png" width="3%" alt="" />
-  <a href="https://twitter.com/OpenMMLab" style="text-decoration:none;">
-    <img src="https://user-images.githubusercontent.com/25839884/218346637-d30c8a0f-3eba-4699-8131-512fb06d46db.png" width="3%" alt="" /></a>
-  <img src="https://user-images.githubusercontent.com/25839884/218346358-56cc8e2f-a2b8-487f-9088-32480cceabcf.png" width="3%" alt="" />
-  <a href="https://www.youtube.com/openmmlab" style="text-decoration:none;">
-    <img src="https://user-images.githubusercontent.com/25839884/218346691-ceb2116a-465a-40af-8424-9f30d2348ca9.png" width="3%" alt="" /></a>
-  <img src="https://user-images.githubusercontent.com/25839884/218346358-56cc8e2f-a2b8-487f-9088-32480cceabcf.png" width="3%" alt="" />
-  <a href="https://space.bilibili.com/1293512903" style="text-decoration:none;">
-    <img src="https://user-images.githubusercontent.com/25839884/219026751-d7d14cce-a7c9-4e82-9942-8375fca65b99.png" width="3%" alt="" /></a>
-  <img src="https://user-images.githubusercontent.com/25839884/218346358-56cc8e2f-a2b8-487f-9088-32480cceabcf.png" width="3%" alt="" />
-  <a href="https://www.zhihu.com/people/openmmlab" style="text-decoration:none;">
-    <img src="https://user-images.githubusercontent.com/25839884/219026120-ba71e48b-6e94-4bd4-b4e9-b7d175b5e362.png" width="3%" alt="" /></a>
-</div>
+## Протокол экспериментов и воспроизводимость
 
-## Introduction
+- Классы зафиксированы как `0=background`, `1=cat`, `2=dog`,
+  `255=ignore`.
+- Все изображения и маски имеют размер `256×256`.
+- Общий режим обучения: seed 42, deterministic mode, batch size 8, AMP,
+  максимум 6000 итераций, Linear warm-up 200 итераций, PolyLR, validation
+  каждые 250 итераций, сохранение лучшего `mDice`.
+- Early stopping: восемь validation-проверок без улучшения минимум на
+  0.1 процентного пункта.
+- Checkpoint выбирался только по aggregate validation mDice. При разнице
+  `<0.001` правило выбора использует foreground mDice, затем худший Dice
+  foreground-класса. Test в ранжировании не участвует.
+- Все метрики независимо пересчитаны из сохранённых label PNG: сначала
+  суммируется confusion matrix по всей выборке, затем считаются aggregate
+  Dice, class-wise Dice, foreground mDice, mIoU, accuracy и per-sample
+  foreground Dice. Пиксели `255` исключаются.
+- Значения в JSON хранятся в диапазоне 0–1. mmseg выводит округлённые
+  проценты. Для финального test разница между независимым `0.9216629060` и
+  mmseg `0.9217` равна `0.000037094 < 1e-4`.
 
-MMSegmentation is an open source semantic segmentation toolbox based on PyTorch.
-It is a part of the OpenMMLab project.
+Обучение выполнялось на RTX 5090 в отдельном Docker-контейнере без
+`--privileged` и Docker socket, с лимитами 16 CPU, 48 GiB RAM и 8 GiB shared
+memory. Системные Python/CUDA и существующие контейнеры сервера не
+изменялись. Перед каждым запуском проверялась загрузка GPU.
 
-The [main](https://github.com/open-mmlab/mmsegmentation/tree/main) branch works with PyTorch 1.6+.
+Окружение описано в
+[`Dockerfile`](practicum_work/environment/Dockerfile) и
+[`versions.txt`](practicum_work/environment/versions.txt):
 
-### 🎉 Introducing MMSegmentation v1.0.0 🎉
+- `pytorch/pytorch:2.7.1-cuda12.8-cudnn9-devel`;
+- PyTorch 2.7.1 + CUDA 12.8;
+- `mmcv-lite==2.1.0`;
+- `mmengine==0.10.7`;
+- `clearml==2.1.10`.
 
-We are thrilled to announce the official release of MMSegmentation's latest version! For this new release, the [main](https://github.com/open-mmlab/mmsegmentation/tree/main) branch serves as the primary branch, while the development branch is [dev-1.x](https://github.com/open-mmlab/mmsegmentation/tree/dev-1.x). The stable branch for the previous release remains as the [0.x](https://github.com/open-mmlab/mmsegmentation/tree/0.x) branch. Please note that the [master](https://github.com/open-mmlab/mmsegmentation/tree/master) branch will only be maintained for a limited time before being removed. We encourage you to be mindful of branch selection and updates during use. Thank you for your unwavering support and enthusiasm, and let's work together to make MMSegmentation even more robust and powerful! 💪
+Smoke-test подтвердил RTX 5090 compute capability `(12, 0)`, успешный импорт
+mmseg/mmcv/mmengine, загрузку всех восьми конфигов, конечный
+forward/backward без NaN и создание ClearML-задачи. Результат:
+[`smoke_result.json`](practicum_work/results/smoke_result.json).
 
-MMSegmentation v1.x brings remarkable improvements over the 0.x release, offering a more flexible and feature-packed experience. To utilize the new features in v1.x, we kindly invite you to consult our detailed [📚 migration guide](https://mmsegmentation.readthedocs.io/en/latest/migration/interface.html), which will help you seamlessly transition your projects. Your support is invaluable, and we eagerly await your feedback!
+Задачи опубликованы в проекте ClearML
+`Practicum/Sprint6-mmsegmentation` и имеют статус `Completed` + `Shared`.
+Согласно механизму
+[ClearML experiment sharing](https://clear.ml/docs/latest/docs/webapp/webapp_exp_sharing/),
+Share-ссылка даёт зарегистрированному пользователю read-only доступ.
+Hosted ClearML требует входа; полностью анонимный просмотр без учётной
+записи платформа не предоставляет.
 
-![demo image](resources/seg_demo.gif)
+## Этап 1. Исследовательский анализ (EDA)
 
-### Major features
+### Анализ качества данных
 
-- **Unified Benchmark**
+Исходный датасет содержал 200 train, 120 val и 120 test пар
+«изображение–маска». Скрипт аудита проверил соответствие пар, размеры,
+допустимые значения масок, количество компонент, площадь и bounding box
+объектов, точные дубликаты, совпадение базовых COCO ID между split и
+перцептивные dHash-дубликаты между split.
 
-  We provide a unified benchmark toolbox for various semantic segmentation methods.
+Обнаружены две группы дефектов:
 
-- **Modular Design**
+1. Пять train-масок содержали только обрывки контура вместо размеченного
+   объекта. Их удаление затрагивает лишь 5 из 200 исходных train-сэмплов
+   (2.5%), поэтому ручная доразметка не требовалась:
+   `000000028253_7169`, `000000574769_0`,
+   `000000121530_5761`, `000000275919_4499`,
+   `000000247301_4455`.
+2. `000000481212_908` и `000000481212_908_1` — два идентичных изображения
+   с дополняющими масками cat и dog. Они объединены в одну пару; 35 пикселей,
+   где две маски конфликтуют, получили `ignore=255`.
 
-  We decompose the semantic segmentation framework into different components and one can easily construct a customized semantic segmentation framework by combining different modules.
+После воспроизводимой чистки получены **194 train, 120 val и 120 test**
+изображений. Val/test скопированы побайтово: общий SHA-256 manifest до и
+после одинаков —
+`e7ccda14e72d45c9abdf563b2e84d708661c41e2c702a490a4b5ddb73262280d`
+для 480 файлов. Контракт чистки записан в
+[`data_cleaning_manifest.json`](practicum_work/results/data_cleaning_manifest.json)
+и проверяется автотестом.
 
-- **Support of multiple methods out of box**
+Пример пяти удалённых дефектных масок:
 
-  The toolbox directly supports popular and contemporary semantic segmentation frameworks, *e.g.* PSPNet, DeepLabV3, PSANet, DeepLabV3+, etc.
+![Дефектные маски до очистки](practicum_work/supplementary/viz/eda/broken_masks_before_cleaning.png)
 
-- **High efficiency**
+Объединение дубликата до/после (жёлтым обозначен `ignore=255`):
 
-  The training speed is faster than or comparable to other codebases.
+![Объединение масок дубликата](practicum_work/supplementary/viz/eda/duplicate_merge_before_after.png)
 
-## What's New
+### EDA
 
-v1.2.0 was released on 10/12/2023, from 1.1.0 to 1.2.0, we have added or updated the following features:
+Все 434 очищенных изображения имеют размер `256×256`. По всем split доли
+валидных пикселей составляют:
 
-### Highlights
+| Класс | Доля пикселей | Присутствие в train |
+|---|---:|---:|
+| background | 89.9774% | 194 |
+| cat | 5.7128% | 96 (95 cat-only + 1 cat/dog) |
+| dog | 4.3098% | 99 (98 dog-only + 1 cat/dog) |
 
-- Support for the open-vocabulary semantic segmentation algorithm [SAN](configs/san/README.md)
+В train отдельно: background 90.5786%, cat 5.1343%, dog 4.2871%.
+Следовательно, фон доминирует, а dog представлен слабее cat; одной общей
+accuracy для оценки недостаточно.
 
-- Support monocular depth estimation task, please refer to [VPD](configs/vpd/README.md) and [Adabins](projects/Adabins/README.md) for more details.
+![Распределение пикселей после очистки](practicum_work/supplementary/viz/eda/cleaned/class_pixel_distribution.png)
 
-  ![depth estimation](https://github.com/open-mmlab/mmsegmentation/assets/15952744/07afd0e9-8ace-4a00-aa1e-5bf0ca92dcbc)
+Доля foreground на изображение лежит в диапазоне `0.00508–0.35901`,
+медиана `0.08880`. Число связных foreground-компонент:
+минимум 1, медиана 1, максимум 17. Нормированный масштаб bounding box
+`sqrt(area)/256`: минимум `0.08558`, медиана `0.42153`, максимум `0.70250`.
 
-- Add new projects: open-vocabulary semantic segmentation algorithm [CAT-Seg](projects/CAT-Seg/README.md), real-time semantic segmentation algofithm [PP-MobileSeg](projects/pp_mobileseg/README.md)
+![Распределение площади foreground](practicum_work/supplementary/viz/eda/cleaned/foreground_area_histogram.png)
 
-## Installation
+![Распределение масштаба bounding box](practicum_work/supplementary/viz/eda/cleaned/bbox_scale_histogram.png)
 
-Please refer to [get_started.md](docs/en/get_started.md#installation) for installation and [dataset_prepare.md](docs/en/user_guides/2_dataset_prepare.md#prepare-datasets) for dataset preparation.
+После чистки точных дубликатов не осталось. Пересечений базовых ID между
+train/val/test и межсплитовых dHash-пар с расстоянием `≤5` не обнаружено,
+то есть явной утечки данных нет. Val и test сбалансированы по присутствию:
+по 60 изображений cat и dog в каждом.
 
-## Get Started
+Основные доменные трудности:
 
-Please see [Overview](docs/en/overview.md) for the general introduction of MMSegmentation.
+- кошка и собака могут иметь похожий силуэт, особенно при малом масштабе,
+  размытии или окклюзии;
+- фон занимает около 90% пикселей и может маскировать слабое качество
+  foreground в общей метрике;
+- поза, шерсть и размытая граница объекта дают неоднозначные контуры;
+- отдельные изображения содержат очень маленький объект или много мелких
+  компонент.
 
-Please see [user guides](https://mmsegmentation.readthedocs.io/en/latest/user_guides/index.html#) for the basic usage of MMSegmentation.
-There are also [advanced tutorials](https://mmsegmentation.readthedocs.io/en/latest/advanced_guides/index.html) for in-depth understanding of mmseg design and implementation .
+Полные исходные и очищенные таблицы находятся в
+[`supplementary/viz/eda`](practicum_work/supplementary/viz/eda).
 
-A Colab tutorial is also provided. You may preview the notebook [here](demo/MMSegmentation_Tutorial.ipynb) or directly [run](https://colab.research.google.com/github/open-mmlab/mmsegmentation/blob/main/demo/MMSegmentation_Tutorial.ipynb) on Colab.
+## Этап 2. Формирование первичных гипотез
 
-To migrate from MMSegmentation 0.x, please refer to [migration](docs/en/migration).
+### Стартовая гипотеза 1 — FCN ResNet-50-D8
 
-## Tutorial
+**Описание гипотезы**
 
-<div align="center">
-  <b>MMSegmentation Tutorials</b>
-</div>
-<table align="center">
-  <tbody>
-    <tr align="center" valign="center">
-      <td>
-        <b>Get Started</b>
-      </td>
-      <td>
-        <b>MMSeg Basic Tutorial</b>
-      </td>
-      <td>
-        <b>MMSeg Detail Tutorial</b>
-      </td>
-      <td>
-        <b>MMSeg Development Tutorial</b>
-      </td>
-    </tr>
-    <tr valign="top">
-      <td>
-        <ul>
-          <li><a href="docs/en/overview.md">MMSeg overview</a></li>
-          <li><a href="docs/en/get_started.md">MMSeg Installation</a></li>
-          <li><a href="docs/en/notes/faq.md">FAQ</a></li>
-        </ul>
-      </td>
-      <td>
-        <ul>
-          <li><a href="docs/en/user_guides/1_config.md">Tutorial 1: Learn about Configs</a></li>
-          <li><a href="docs/en/user_guides/2_dataset_prepare.md">Tutorial 2: Prepare datasets</a></li>
-          <li><a href="docs/en/user_guides/3_inference.md">Tutorial 3: Inference with existing models</a></li>
-          <li><a href="docs/en/user_guides/4_train_test.md">Tutorial 4: Train and test with existing models</a></li>
-          <li><a href="docs/en/user_guides/5_deployment.md">Tutorial 5: Model deployment</a></li>
-          <li><a href="docs/zh_cn/user_guides/deploy_jetson.md">Deploy mmsegmentation on Jetson platform</a></li>
-          <li><a href="docs/en/user_guides/useful_tools.md">Useful Tools</a></li>
-          <li><a href="docs/en/user_guides/visualization_feature_map.md">Feature Map Visualization</a></li>
-          <li><a href="docs/en/user_guides/visualization.md">Visualization</a></li>
-        </ul>
-      </td>
-      <td>
-        <ul>
-          <li><a href="docs/en/advanced_guides/datasets.md">MMSeg Dataset</a></li>
-          <li><a href="docs/en/advanced_guides/models.md">MMSeg Models</a></li>
-          <li><a href="docs/en/advanced_guides/structures.md">MMSeg Dataset Structures</a></li>
-          <li><a href="docs/en/advanced_guides/transforms.md">MMSeg Data Transforms</a></li>
-          <li><a href="docs/en/advanced_guides/data_flow.md">MMSeg Dataflow</a></li>
-          <li><a href="docs/en/advanced_guides/engine.md">MMSeg Training Engine</a></li>
-          <li><a href="docs/en/advanced_guides/evaluation.md">MMSeg Evaluation</a></li>
-        </ul>
-      </td>
-      <td>
-        <ul>
-          <li><a href="docs/en/advanced_guides/add_datasets.md">Add New Datasets</a></li>
-          <li><a href="docs/en/advanced_guides/add_metrics.md">Add New Metrics</a></li>
-          <li><a href="docs/en/advanced_guides/add_models.md">Add New Modules</a></li>
-          <li><a href="docs/en/advanced_guides/add_transforms.md">Add New Data Transforms</a></li>
-          <li><a href="docs/en/advanced_guides/customize_runtime.md">Customize Runtime Settings</a></li>
-          <li><a href="docs/en/advanced_guides/training_tricks.md">Training Tricks</a></li>
-          <li><a href=".github/CONTRIBUTING.md">Contribute code to MMSeg</a></li>
-          <li><a href="docs/zh_cn/advanced_guides/contribute_dataset.md">Contribute a standard dataset in projects</a></li>
-          <li><a href="docs/en/device/npu.md">NPU (HUAWEI Ascend)</a></li>
-          <li><a href="docs/en/migration/interface.md">0.x → 1.x migration</a></li>
-          <li><a href="docs/en/migration/package.md">0.x → 1.x package</a></li>
-        </ul>
-      </td>
-    </tr>
-  </tbody>
-</table>
+FCN с ImageNet-pretrained ResNet-50-D8 выбран как устойчивый CNN-бейзлайн.
+Основная и auxiliary головы используют CrossEntropy; оптимизатор SGD
+(`lr=0.01`, momentum `0.9`, weight decay `5e-4`). Минимальные аугментации:
+resize `256×256` и horizontal flip. Это даёт понятную отправную точку без
+сложного регуляризующего пайплайна.
 
-## Benchmark and model zoo
+**Результаты обучения**
 
-Results and models are available in the [model zoo](docs/en/model_zoo.md).
+- [Конфиг](practicum_work/configs/baseline_fcn_r50.py)
+- [ClearML, task `9c5c881e6be1494ea39b28669d8f4b22`](https://app.clear.ml/projects/e46e637ae0f148c68f125b69cec89660/experiments/9c5c881e6be1494ea39b28669d8f4b22/output/execution)
+- [Независимые validation-метрики](practicum_work/results/01_baseline_fcn_r50_val_metrics.json)
+- Лучший checkpoint: iteration 5500
 
-<div align="center">
-  <b>Overview</b>
-</div>
-<table align="center">
-  <tbody>
-    <tr align="center" valign="center">
-      <td>
-        <b>Supported backbones</b>
-      </td>
-      <td>
-        <b>Supported methods</b>
-      </td>
-      <td>
-        <b>Supported Head</b>
-      </td>
-      <td>
-        <b>Supported datasets</b>
-      </td>
-      <td>
-        <b>Other</b>
-      </td>
-    </tr>
-    <tr valign="top">
-      <td>
-        <ul>
-        <li><a href="mmseg/models/backbones/resnet.py">ResNet(CVPR'2016)</a></li>
-        <li><a href="mmseg/models/backbones/resnext.py">ResNeXt (CVPR'2017)</a></li>
-        <li><a href="configs/hrnet">HRNet (CVPR'2019)</a></li>
-        <li><a href="configs/resnest">ResNeSt (ArXiv'2020)</a></li>
-        <li><a href="configs/mobilenet_v2">MobileNetV2 (CVPR'2018)</a></li>
-        <li><a href="configs/mobilenet_v3">MobileNetV3 (ICCV'2019)</a></li>
-        <li><a href="configs/vit">Vision Transformer (ICLR'2021)</a></li>
-        <li><a href="configs/swin">Swin Transformer (ICCV'2021)</a></li>
-        <li><a href="configs/twins">Twins (NeurIPS'2021)</a></li>
-        <li><a href="configs/beit">BEiT (ICLR'2022)</a></li>
-        <li><a href="configs/convnext">ConvNeXt (CVPR'2022)</a></li>
-        <li><a href="configs/mae">MAE (CVPR'2022)</a></li>
-        <li><a href="configs/poolformer">PoolFormer (CVPR'2022)</a></li>
-        <li><a href="configs/segnext">SegNeXt (NeurIPS'2022)</a></li>
-        </ul>
-      </td>
-      <td>
-        <ul>
-          <li><a href="configs/san/">SAN (CVPR'2023)</a></li>
-          <li><a href="configs/vpd">VPD (ICCV'2023)</a></li>
-          <li><a href="configs/ddrnet">DDRNet (T-ITS'2022)</a></li>
-          <li><a href="configs/pidnet">PIDNet (ArXiv'2022)</a></li>
-          <li><a href="configs/mask2former">Mask2Former (CVPR'2022)</a></li>
-          <li><a href="configs/maskformer">MaskFormer (NeurIPS'2021)</a></li>
-          <li><a href="configs/knet">K-Net (NeurIPS'2021)</a></li>
-          <li><a href="configs/segformer">SegFormer (NeurIPS'2021)</a></li>
-          <li><a href="configs/segmenter">Segmenter (ICCV'2021)</a></li>
-          <li><a href="configs/dpt">DPT (ArXiv'2021)</a></li>
-          <li><a href="configs/setr">SETR (CVPR'2021)</a></li>
-          <li><a href="configs/stdc">STDC (CVPR'2021)</a></li>
-          <li><a href="configs/bisenetv2">BiSeNetV2 (IJCV'2021)</a></li>
-          <li><a href="configs/cgnet">CGNet (TIP'2020)</a></li>
-          <li><a href="configs/point_rend">PointRend (CVPR'2020)</a></li>
-          <li><a href="configs/dnlnet">DNLNet (ECCV'2020)</a></li>
-          <li><a href="configs/ocrnet">OCRNet (ECCV'2020)</a></li>
-          <li><a href="configs/isanet">ISANet (ArXiv'2019/IJCV'2021)</a></li>
-          <li><a href="configs/fastscnn">Fast-SCNN (ArXiv'2019)</a></li>
-          <li><a href="configs/fastfcn">FastFCN (ArXiv'2019)</a></li>
-          <li><a href="configs/gcnet">GCNet (ICCVW'2019/TPAMI'2020)</a></li>
-          <li><a href="configs/ann">ANN (ICCV'2019)</a></li>
-          <li><a href="configs/emanet">EMANet (ICCV'2019)</a></li>
-          <li><a href="configs/ccnet">CCNet (ICCV'2019)</a></li>
-          <li><a href="configs/dmnet">DMNet (ICCV'2019)</a></li>
-          <li><a href="configs/sem_fpn">Semantic FPN (CVPR'2019)</a></li>
-          <li><a href="configs/danet">DANet (CVPR'2019)</a></li>
-          <li><a href="configs/apcnet">APCNet (CVPR'2019)</a></li>
-          <li><a href="configs/nonlocal_net">NonLocal Net (CVPR'2018)</a></li>
-          <li><a href="configs/encnet">EncNet (CVPR'2018)</a></li>
-          <li><a href="configs/deeplabv3plus">DeepLabV3+ (CVPR'2018)</a></li>
-          <li><a href="configs/upernet">UPerNet (ECCV'2018)</a></li>
-          <li><a href="configs/icnet">ICNet (ECCV'2018)</a></li>
-          <li><a href="configs/psanet">PSANet (ECCV'2018)</a></li>
-          <li><a href="configs/bisenetv1">BiSeNetV1 (ECCV'2018)</a></li>
-          <li><a href="configs/deeplabv3">DeepLabV3 (ArXiv'2017)</a></li>
-          <li><a href="configs/pspnet">PSPNet (CVPR'2017)</a></li>
-          <li><a href="configs/erfnet">ERFNet (T-ITS'2017)</a></li>
-          <li><a href="configs/unet">UNet (MICCAI'2016/Nat. Methods'2019)</a></li>
-          <li><a href="configs/fcn">FCN (CVPR'2015/TPAMI'2017)</a></li>
-        </ul>
-      </td>
-      <td>
-        <ul>
-          <li><a href="mmseg/models/decode_heads/ann_head.py">ANN_Head</li>
-          <li><a href="mmseg/models/decode_heads/apc_head.py">APC_Head</li>
-          <li><a href="mmseg/models/decode_heads/aspp_head.py">ASPP_Head</li>
-          <li><a href="mmseg/models/decode_heads/cc_head.py">CC_Head</li>
-          <li><a href="mmseg/models/decode_heads/da_head.py">DA_Head</li>
-          <li><a href="mmseg/models/decode_heads/ddr_head.py">DDR_Head</li>
-          <li><a href="mmseg/models/decode_heads/dm_head.py">DM_Head</li>
-          <li><a href="mmseg/models/decode_heads/dnl_head.py">DNL_Head</li>
-          <li><a href="mmseg/models/decode_heads/dpt_head.py">DPT_HEAD</li>
-          <li><a href="mmseg/models/decode_heads/ema_head.py">EMA_Head</li>
-          <li><a href="mmseg/models/decode_heads/enc_head.py">ENC_Head</li>
-          <li><a href="mmseg/models/decode_heads/fcn_head.py">FCN_Head</li>
-          <li><a href="mmseg/models/decode_heads/fpn_head.py">FPN_Head</li>
-          <li><a href="mmseg/models/decode_heads/gc_head.py">GC_Head</li>
-          <li><a href="mmseg/models/decode_heads/ham_head.py">LightHam_Head</li>
-          <li><a href="mmseg/models/decode_heads/isa_head.py">ISA_Head</li>
-          <li><a href="mmseg/models/decode_heads/knet_head.py">Knet_Head</li>
-          <li><a href="mmseg/models/decode_heads/lraspp_head.py">LRASPP_Head</li>
-          <li><a href="mmseg/models/decode_heads/mask2former_head.py">mask2former_Head</li>
-          <li><a href="mmseg/models/decode_heads/maskformer_head.py">maskformer_Head</li>
-          <li><a href="mmseg/models/decode_heads/nl_head.py">NL_Head</li>
-          <li><a href="mmseg/models/decode_heads/ocr_head.py">OCR_Head</li>
-          <li><a href="mmseg/models/decode_heads/pid_head.py">PID_Head</li>
-          <li><a href="mmseg/models/decode_heads/point_head.py">point_Head</li>
-          <li><a href="mmseg/models/decode_heads/psa_head.py">PSA_Head</li>
-          <li><a href="mmseg/models/decode_heads/psp_head.py">PSP_Head</li>
-          <li><a href="mmseg/models/decode_heads/san_head.py">SAN_Head</li>
-          <li><a href="mmseg/models/decode_heads/segformer_head.py">segformer_Head</li>
-          <li><a href="mmseg/models/decode_heads/segmenter_mask_head.py">segmenter_mask_Head</li>
-          <li><a href="mmseg/models/decode_heads/sep_aspp_head.py">SepASPP_Head</li>
-          <li><a href="mmseg/models/decode_heads/sep_fcn_head.py">SepFCN_Head</li>
-          <li><a href="mmseg/models/decode_heads/setr_mla_head.py">SETRMLAHead_Head</li>
-          <li><a href="mmseg/models/decode_heads/setr_up_head.py">SETRUP_Head</li>
-          <li><a href="mmseg/models/decode_heads/stdc_head.py">STDC_Head</li>
-          <li><a href="mmseg/models/decode_heads/uper_head.py">Uper_Head</li>
-          <li><a href="mmseg/models/decode_heads/vpd_depth_head.py">VPDDepth_Head</li>
-        </ul>
-      </td>
-      <td>
-        <ul>
-          <li><a href="https://github.com/open-mmlab/mmsegmentation/blob/main/docs/en/user_guides/2_dataset_prepare.md#cityscapes">Cityscapes</a></li>
-          <li><a href="https://github.com/open-mmlab/mmsegmentation/blob/main/docs/en/user_guides/2_dataset_prepare.md#pascal-voc">PASCAL VOC</a></li>
-          <li><a href="https://github.com/open-mmlab/mmsegmentation/blob/main/docs/en/user_guides/2_dataset_prepare.md#ade20k">ADE20K</a></li>
-          <li><a href="https://github.com/open-mmlab/mmsegmentation/blob/main/docs/en/user_guides/2_dataset_prepare.md#pascal-context">Pascal Context</a></li>
-          <li><a href="https://github.com/open-mmlab/mmsegmentation/blob/main/docs/en/user_guides/2_dataset_prepare.md#coco-stuff-10k">COCO-Stuff 10k</a></li>
-          <li><a href="https://github.com/open-mmlab/mmsegmentation/blob/main/docs/en/user_guides/2_dataset_prepare.md#coco-stuff-164k">COCO-Stuff 164k</a></li>
-          <li><a href="https://github.com/open-mmlab/mmsegmentation/blob/main/docs/en/user_guides/2_dataset_prepare.md#chase-db1">CHASE_DB1</a></li>
-          <li><a href="https://github.com/open-mmlab/mmsegmentation/blob/main/docs/en/user_guides/2_dataset_prepare.md#drive">DRIVE</a></li>
-          <li><a href="https://github.com/open-mmlab/mmsegmentation/blob/main/docs/en/user_guides/2_dataset_prepare.md#hrf">HRF</a></li>
-          <li><a href="https://github.com/open-mmlab/mmsegmentation/blob/main/docs/en/user_guides/2_dataset_prepare.md#stare">STARE</a></li>
-          <li><a href="https://github.com/open-mmlab/mmsegmentation/blob/main/docs/en/user_guides/2_dataset_prepare.md#dark-zurich">Dark Zurich</a></li>
-          <li><a href="https://github.com/open-mmlab/mmsegmentation/blob/main/docs/en/user_guides/2_dataset_prepare.md#nighttime-driving">Nighttime Driving</a></li>
-          <li><a href="https://github.com/open-mmlab/mmsegmentation/blob/main/docs/en/user_guides/2_dataset_prepare.md#loveda">LoveDA</a></li>
-          <li><a href="https://github.com/open-mmlab/mmsegmentation/blob/main/docs/en/user_guides/2_dataset_prepare.md#isprs-potsdam">Potsdam</a></li>
-          <li><a href="https://github.com/open-mmlab/mmsegmentation/blob/main/docs/en/user_guides/2_dataset_prepare.md#isprs-vaihingen">Vaihingen</a></li>
-          <li><a href="https://github.com/open-mmlab/mmsegmentation/blob/main/docs/en/user_guides/2_dataset_prepare.md#isaid">iSAID</a></li>
-          <li><a href="https://github.com/open-mmlab/mmsegmentation/blob/main/docs/en/user_guides/2_dataset_prepare.md#mapillary-vistas-datasets">Mapillary Vistas</a></li>
-          <li><a href="https://github.com/open-mmlab/mmsegmentation/blob/main/docs/en/user_guides/2_dataset_prepare.md#levir-cd">LEVIR-CD</a></li>
-          <li><a href="https://github.com/open-mmlab/mmsegmentation/blob/main/docs/en/user_guides/2_dataset_prepare.md#bdd100K">BDD100K</a></li>
-          <li><a href="https://github.com/open-mmlab/mmsegmentation/blob/main/docs/en/user_guides/2_dataset_prepare.md#nyu">NYU</a></li>
-          <li><a href="https://github.com/open-mmlab/mmsegmentation/blob/main/docs/en/user_guides/2_dataset_prepare.md#hsi-drive-2.0">HSIDrive20</a></li>
-        </ul>
-      </td>
-      <td>
-        <ul>
-          <li><b>Supported loss</b></li>
-        <ul>
-          <li><a href="mmseg/models/losses/boundary_loss.py">boundary_loss</a></li>
-          <li><a href="mmseg/models/losses/cross_entropy_loss.py">cross_entropy_loss</a></li>
-          <li><a href="mmseg/models/losses/dice_loss.py">dice_loss</a></li>
-          <li><a href="mmseg/models/losses/focal_loss.py">focal_loss</a></li>
-          <li><a href="mmseg/models/losses/huasdorff_distance_loss.py">huasdorff_distance_loss</a></li>
-          <li><a href="mmseg/models/losses/kldiv_loss.py">kldiv_loss</a></li>
-          <li><a href="mmseg/models/losses/lovasz_loss.py">lovasz_loss</a></li>
-          <li><a href="mmseg/models/losses/ohem_cross_entropy_loss.py">ohem_cross_entropy_loss</a></li>
-          <li><a href="mmseg/models/losses/silog_loss.py">silog_loss</a></li>
-          <li><a href="mmseg/models/losses/tversky_loss.py">tversky_loss</a></li>
-        </ul>
-        </ul>
-      </td>
-  </tbody>
-</table>
+`mDice=0.897369`, foreground mDice `0.852807`; Dice:
+background `0.986494`, cat `0.881841`, dog `0.823772`.
 
-Please refer to [FAQ](docs/en/notes/faq.md) for frequently asked questions.
+![Кривые FCN-R50](practicum_work/supplementary/viz/training_curves/01_baseline_fcn_r50.png)
 
-## Projects
+**Анализ качества**
 
-[Here](projects/README.md) are some implementations of SOTA models and solutions built on MMSegmentation, which are supported and maintained by community users. These projects demonstrate the best practices based on MMSegmentation for research and product development. We welcome and appreciate all the contributions to OpenMMLab ecosystem.
+FCN сразу превысил целевой уровень. При этом разрыв cat/dog равен 5.81
+процентного пункта, поэтому фон не единственный источник высокого mDice.
+Лучшие примеры имеют точный внешний контур; основные ошибки — пропуск
+тонких частей, неточная граница и путаница классов на сложных ракурсах.
 
-## Contributing
+![Лучшие и худшие validation-примеры FCN](practicum_work/supplementary/viz/predictions/01_baseline_fcn_r50/worst_contact_sheet.png)
 
-We appreciate all contributions to improve MMSegmentation. Please refer to [CONTRIBUTING.md](.github/CONTRIBUTING.md) for the contributing guideline.
+### Стартовая гипотеза 2 — SegFormer MiT-B0
 
-## Acknowledgement
+**Описание гипотезы**
 
-MMSegmentation is an open source project that welcome any contribution and feedback.
-We wish that the toolbox and benchmark could serve the growing research
-community by providing a flexible as well as standardized toolkit to reimplement existing methods
-and develop their own new semantic segmentation methods.
+Компактный ImageNet-pretrained SegFormer MiT-B0 проверяет гипотезу, что
+multi-scale transformer-признаки лучше обрабатывают разный размер объектов.
+Использованы CrossEntropy, AdamW (`lr=6e-5`, weight decay `0.01`) и тот же
+минимальный набор аугментаций, чтобы сравнение архитектур оставалось
+интерпретируемым.
 
-## Citation
+**Результаты обучения**
 
-If you find this project useful in your research, please consider cite:
+- [Конфиг](practicum_work/configs/baseline_segformer_mitb0.py)
+- [ClearML, task `680a7ce5e4ca4a5da95f7bbc650984f9`](https://app.clear.ml/projects/e46e637ae0f148c68f125b69cec89660/experiments/680a7ce5e4ca4a5da95f7bbc650984f9/output/execution)
+- [Независимые validation-метрики](practicum_work/results/02_baseline_segformer_mitb0_val_metrics.json)
+- Лучший checkpoint: iteration 1750
 
-```bibtex
-@misc{mmseg2020,
-    title={{MMSegmentation}: OpenMMLab Semantic Segmentation Toolbox and Benchmark},
-    author={MMSegmentation Contributors},
-    howpublished = {\url{https://github.com/open-mmlab/mmsegmentation}},
-    year={2020}
-}
+`mDice=0.873697`, foreground mDice `0.818284`; Dice:
+background `0.984523`, cat `0.852485`, dog `0.784083`.
+
+![Кривые MiT-B0](practicum_work/supplementary/viz/training_curves/02_baseline_segformer_mitb0.png)
+
+**Анализ качества**
+
+MiT-B0 уступил FCN на 2.3672 процентного пункта mDice и на 3.4522 пункта
+foreground mDice. На маленьком train split компактный encoder и один CE
+оказались недостаточны; сильнее всего страдает dog. Это определило
+последовательность следующих экспериментов: сначала изменить loss, затем
+регуляризацию, после этого ёмкость backbone.
+
+![Лучшие validation-примеры MiT-B0](practicum_work/supplementary/viz/predictions/02_baseline_segformer_mitb0/best_contact_sheet.png)
+
+![Худшие validation-примеры MiT-B0](practicum_work/supplementary/viz/predictions/02_baseline_segformer_mitb0/worst_contact_sheet.png)
+
+## Этап 3. Эксперименты по улучшению качества
+
+### Эксперимент 1 — CrossEntropy + DiceLoss
+
+**Описание эксперимента**
+
+Архитектура, optimizer и аугментации MiT-B0 не менялись. К CrossEntropy
+добавлен multiclass DiceLoss с `ignore_index=255`. Цель — напрямую
+оптимизировать перекрытие и уменьшить влияние доминирующего фона.
+
+**Результаты обучения**
+
+- [Конфиг](practicum_work/configs/exp01_mitb0_ce_dice.py)
+- [ClearML, task `1a9bd8d1ed7243e5a39e85f2394bd59b`](https://app.clear.ml/projects/e46e637ae0f148c68f125b69cec89660/experiments/1a9bd8d1ed7243e5a39e85f2394bd59b/output/execution)
+- [Validation-метрики](practicum_work/results/03_exp_mitb0_ce_dice_val_metrics.json)
+- Лучший checkpoint: iteration 3500
+
+`mDice=0.876523`, foreground mDice `0.822186`; прирост к MiT-B0 CE:
+`+0.2826` и `+0.3902` процентного пункта соответственно.
+
+![Кривые MiT-B0 CE+Dice](practicum_work/supplementary/viz/training_curves/03_exp_mitb0_ce_dice.png)
+
+**Анализ качества**
+
+Гипотеза подтвердилась умеренно: cat вырос до `0.857146`, dog до
+`0.787226`. Loss улучшил перекрытие, но не решил нехватку разнообразия и
+ошибки классификации похожих силуэтов.
+
+![Ошибки MiT-B0 CE+Dice](practicum_work/supplementary/viz/predictions/03_exp_mitb0_ce_dice/worst_contact_sheet.png)
+
+### Эксперимент 2 — усиленные аугментации
+
+**Описание эксперимента**
+
+К предыдущему варианту добавлены RandomResize с диапазоном `0.75–1.25`,
+RandomCrop `256×256`, horizontal flip и PhotoMetricDistortion. Меняется
+только train pipeline; модель, loss и optimizer сохранены. Цель —
+стабилизировать модель на разном масштабе, освещении и кадрировании.
+
+![Примеры усиленных аугментаций](practicum_work/supplementary/viz/augmentations/strong_augmentation_examples.png)
+
+**Результаты обучения**
+
+- [Конфиг](practicum_work/configs/exp02_mitb0_strong_aug.py)
+- [ClearML, task `5ad50799efd44780a30b0bc68b1c1761`](https://app.clear.ml/projects/e46e637ae0f148c68f125b69cec89660/experiments/5ad50799efd44780a30b0bc68b1c1761/output/execution)
+- [Validation-метрики](practicum_work/results/04_exp_mitb0_strong_aug_val_metrics.json)
+- Лучший checkpoint: iteration 3250
+
+`mDice=0.883640`, foreground mDice `0.832728`; прирост к эксперименту 1:
+`+0.7118` и `+1.0542` процентного пункта.
+
+![Кривые MiT-B0 с аугментациями](practicum_work/supplementary/viz/training_curves/04_exp_mitb0_strong_aug.png)
+
+**Анализ качества**
+
+Dice cat вырос до `0.878433`; dog практически не изменился (`0.787024`).
+Аугментации улучшили устойчивость контура и cat, но dog остаётся узким
+местом, что указывает на ограничение ёмкости признаков, а не только
+переобучение.
+
+![Лучшие и худшие примеры MiT-B0 с аугментациями](practicum_work/supplementary/viz/predictions/04_exp_mitb0_strong_aug/worst_contact_sheet.png)
+
+### Эксперимент 3 — MiT-B2
+
+**Описание эксперимента**
+
+MiT-B0 заменён на более ёмкий ImageNet-pretrained MiT-B2. Loss,
+аугментации, AdamW и режим обучения оставлены прежними. Эксперимент
+проверяет только влияние backbone.
+
+**Результаты обучения**
+
+- [Конфиг](practicum_work/configs/exp03_mitb2_strong_aug.py)
+- [ClearML, task `5de076f4c4e74b7aab33dec7074ba33a`](https://app.clear.ml/projects/e46e637ae0f148c68f125b69cec89660/experiments/5de076f4c4e74b7aab33dec7074ba33a/output/execution)
+- [Validation-метрики](practicum_work/results/05_exp_mitb2_strong_aug_val_metrics.json)
+- Лучший checkpoint: iteration 3750
+
+`mDice=0.932778`, foreground mDice `0.904222`; прирост к эксперименту 2:
+`+4.9137` и `+7.1493` процентного пункта. Dice cat `0.921465`, dog
+`0.886978`.
+
+![Кривые MiT-B2](practicum_work/supplementary/viz/training_curves/05_exp_mitb2_strong_aug.png)
+
+**Анализ качества**
+
+Это самое крупное улучшение серии. Более ёмкие multi-scale признаки
+существенно снизили ошибки dog и улучшили границы. Условие плана для TTA
+выполнено с запасом: validation mDice `0.9328 ≥ 0.78`, Dice cat и dog выше
+`0.70`.
+
+![Лучшие validation-примеры MiT-B2](practicum_work/supplementary/viz/predictions/05_exp_mitb2_strong_aug/best_contact_sheet.png)
+
+![Худшие validation-примеры MiT-B2](practicum_work/supplementary/viz/predictions/05_exp_mitb2_strong_aug/worst_contact_sheet.png)
+
+### Эксперимент 4 — TTA
+
+**Описание эксперимента**
+
+Для checkpoint эксперимента 3 применены масштабы `192×192`, `256×256`,
+`320×320` и horizontal flip. Логиты шести представлений агрегируются
+`SegTTAModel`. Обучение не выполняется, поэтому отдельной train-кривой у
+этого эксперимента нет. Fallback-конфиг продолжения MiT-B2 на 3000
+итераций с `lr=2e-5` сохранён в
+[`exp04_mitb2_long_finetune.py`](practicum_work/configs/exp04_mitb2_long_finetune.py),
+но по условию плана не запускался.
+
+**Результаты обучения/оценки**
+
+- [TTA-конфиг](practicum_work/configs/exp04_mitb2_tta.py)
+- [ClearML, task `3be5d8852d0649ed8d6b26a0861019be`](https://app.clear.ml/projects/e46e637ae0f148c68f125b69cec89660/experiments/3be5d8852d0649ed8d6b26a0861019be/output/execution)
+- [Validation-метрики](practicum_work/results/06_exp_mitb2_tta_val_metrics.json)
+
+`mDice=0.936533`, foreground mDice `0.909469`; прирост к MiT-B2 без TTA:
+`+0.3756` и `+0.5247` процентного пункта. Dice background `0.990662`,
+cat `0.927471`, dog `0.891466`.
+
+**Анализ качества**
+
+TTA даёт небольшой, но согласованный прирост обоим foreground-классам и
+выигрывает больше установленного tie-порога `0.001`; дополнительные
+tie-break правила не понадобились. Этот режим выбран для единственного
+финального запуска на test.
+
+![Лучшие validation-примеры TTA](practicum_work/supplementary/viz/predictions/06_exp_mitb2_tta/best_contact_sheet.png)
+
+![Худшие validation-примеры TTA](practicum_work/supplementary/viz/predictions/06_exp_mitb2_tta/worst_contact_sheet.png)
+
+### Сводное сравнение на validation
+
+| Ранг | Вариант | mDice | FG mDice | Dice bg | Dice cat | Dice dog |
+|---:|---|---:|---:|---:|---:|---:|
+| 1 | MiT-B2 + TTA | **0.936533** | **0.909469** | 0.990662 | **0.927471** | **0.891466** |
+| 2 | MiT-B2, strong aug | 0.932778 | 0.904222 | 0.989890 | 0.921465 | 0.886978 |
+| 3 | FCN-R50 | 0.897369 | 0.852807 | 0.986494 | 0.881841 | 0.823772 |
+| 4 | MiT-B0, strong aug | 0.883640 | 0.832728 | 0.985465 | 0.878433 | 0.787024 |
+| 5 | MiT-B0, CE+Dice | 0.876523 | 0.822186 | 0.985196 | 0.857146 | 0.787226 |
+| 6 | MiT-B0, CE | 0.873697 | 0.818284 | 0.984523 | 0.852485 | 0.784083 |
+
+![Сравнение validation-метрик](practicum_work/supplementary/viz/model_comparison/validation_experiments.png)
+
+Правило и порядок выбора воспроизводятся скриптом
+[`compare_experiments.py`](practicum_work/src/analysis/compare_experiments.py);
+исходные [CSV](practicum_work/results/comparison/validation_experiments.csv)
+и [JSON](practicum_work/results/comparison/validation_selection.json)
+зафиксированы в репозитории.
+
+## Этап 4. Заключение и выбор лучшего эксперимента
+
+### Лучший эксперимент
+
+Выбран SegFormer MiT-B2, обученный с CrossEntropy + DiceLoss и сильными
+аугментациями, с TTA на масштабах 192/256/320 и horizontal flip. Выбор
+сделан исключительно по validation: `0.936533` против `0.932778` у той же
+модели без TTA.
+
+- [Финальный конфиг](practicum_work/configs/final_test_mitb2.py)
+- [Лучший validation ClearML](https://app.clear.ml/projects/e46e637ae0f148c68f125b69cec89660/experiments/3be5d8852d0649ed8d6b26a0861019be/output/execution)
+- [Финальный test ClearML, task `f6f3773d25bf40248e73b450f8472609`](https://app.clear.ml/projects/e46e637ae0f148c68f125b69cec89660/experiments/f6f3773d25bf40248e73b450f8472609/output/execution)
+- [Полные независимые test-метрики](practicum_work/results/07_final_test_selected_model_test_metrics.json)
+
+**mDice (test subset) = 0.9216629060 (92.17%)**
+
+Confusion matrix (`строка = ground truth`, `столбец = prediction`):
+
+| GT \ Pred | background | cat | dog |
+|---|---:|---:|---:|
+| background | 7,002,399 | 16,275 | 37,545 |
+| cat | 39,870 | 406,913 | 9,894 |
+| dog | 31,815 | 15,603 | 304,006 |
+
+Лучший checkpoint: `best_mDice_iter_3750.pth`, 99,624,743 bytes,
+SHA-256
+`cda54ffd5a67a465bd1fa88368046cc4087a06efeea53cf29346fed7149b7bd8`.
+Он возвращён локально в
+`practicum_work/results/checkpoints/best_mDice_iter_3750.pth`, но согласно
+условиям не включён в Git/ZIP. В ClearML checkpoint загружен восемью
+проверяемыми частями; manifest находится в
+[`best_checkpoint_manifest.json`](practicum_work/results/best_checkpoint_manifest.json).
+После скачивания частей восстановление с обязательной проверкой каждого
+хеша выполняется так:
+
+```bash
+python practicum_work/src/analysis/checkpoint_chunks.py join \
+  checkpoint_chunks_manifest.json \
+  --output best_mDice_iter_3750.pth
 ```
 
-## License
+### Примеры корректных предсказаний (тестовый датасет)
 
-This project is released under the [Apache 2.0 license](LICENSE).
+Каждая панель слева направо показывает image, ground truth, prediction и
+prediction overlay. Cat обозначен красным, dog синим. Пять лучших примеров
+по per-sample foreground Dice:
 
-## OpenMMLab Family
+| Пример | Визуализация |
+|---|---|
+| `000000543836_507`, Dice 0.9821 | <img src="practicum_work/supplementary/viz/predictions/07_final_test_selected_model/best/01_000000543836_507.png" width="720" alt="Корректное предсказание 1"> |
+| `000000406211_2388`, Dice 0.9791 | <img src="practicum_work/supplementary/viz/predictions/07_final_test_selected_model/best/02_000000406211_2388.png" width="720" alt="Корректное предсказание 2"> |
+| `000000437537_2563`, Dice 0.9739 | <img src="practicum_work/supplementary/viz/predictions/07_final_test_selected_model/best/03_000000437537_2563.png" width="720" alt="Корректное предсказание 3"> |
+| `000000364167_7048`, Dice 0.9736 | <img src="practicum_work/supplementary/viz/predictions/07_final_test_selected_model/best/04_000000364167_7048.png" width="720" alt="Корректное предсказание 4"> |
+| `000000284148_7566`, Dice 0.9731 | <img src="practicum_work/supplementary/viz/predictions/07_final_test_selected_model/best/05_000000284148_7566.png" width="720" alt="Корректное предсказание 5"> |
 
-- [MMEngine](https://github.com/open-mmlab/mmengine): OpenMMLab foundational library for training deep learning models.
-- [MMCV](https://github.com/open-mmlab/mmcv): OpenMMLab foundational library for computer vision.
-- [MMPreTrain](https://github.com/open-mmlab/mmpretrain): OpenMMLab pre-training toolbox and benchmark.
-- [MMagic](https://github.com/open-mmlab/mmagic): Open**MM**Lab **A**dvanced, **G**enerative and **I**ntelligent **C**reation toolbox.
-- [MMDetection](https://github.com/open-mmlab/mmdetection): OpenMMLab detection toolbox and benchmark.
-- [MMYOLO](https://github.com/open-mmlab/mmyolo): OpenMMLab YOLO series toolbox and benchmark.
-- [MMDetection3D](https://github.com/open-mmlab/mmdetection3d): OpenMMLab's next-generation platform for general 3D object detection.
-- [MMRotate](https://github.com/open-mmlab/mmrotate): OpenMMLab rotated object detection toolbox and benchmark.
-- [MMTracking](https://github.com/open-mmlab/mmtracking): OpenMMLab video perception toolbox and benchmark.
-- [MMSegmentation](https://github.com/open-mmlab/mmsegmentation): OpenMMLab semantic segmentation toolbox and benchmark.
-- [MMOCR](https://github.com/open-mmlab/mmocr): OpenMMLab text detection, recognition, and understanding toolbox.
-- [MMPose](https://github.com/open-mmlab/mmpose): OpenMMLab pose estimation toolbox and benchmark.
-- [MMHuman3D](https://github.com/open-mmlab/mmhuman3d): OpenMMLab 3D human parametric model toolbox and benchmark.
-- [MMFewShot](https://github.com/open-mmlab/mmfewshot): OpenMMLab fewshot learning toolbox and benchmark.
-- [MMAction2](https://github.com/open-mmlab/mmaction2): OpenMMLab's next-generation action understanding toolbox and benchmark.
-- [MMFlow](https://github.com/open-mmlab/mmflow): OpenMMLab optical flow toolbox and benchmark.
-- [MMDeploy](https://github.com/open-mmlab/mmdeploy): OpenMMLab Model Deployment Framework.
-- [MMRazor](https://github.com/open-mmlab/mmrazor): OpenMMLab model compression toolbox and benchmark.
-- [MIM](https://github.com/open-mmlab/mim): MIM installs OpenMMLab packages.
-- [Playground](https://github.com/open-mmlab/playground): A central hub for gathering and showcasing amazing projects built upon OpenMMLab.
+### Примеры ошибок (тестовый датасет)
+
+Пять худших примеров по той же заранее заданной метрике:
+
+| Пример | Визуализация |
+|---|---|
+| `000000284884_6459`, Dice 0.0000 | <img src="practicum_work/supplementary/viz/predictions/07_final_test_selected_model/worst/01_000000284884_6459.png" width="720" alt="Ошибка предсказания 1"> |
+| `000000369547_1504`, Dice 0.0000 | <img src="practicum_work/supplementary/viz/predictions/07_final_test_selected_model/worst/02_000000369547_1504.png" width="720" alt="Ошибка предсказания 2"> |
+| `000000436539_4321`, Dice 0.0000 | <img src="practicum_work/supplementary/viz/predictions/07_final_test_selected_model/worst/03_000000436539_4321.png" width="720" alt="Ошибка предсказания 3"> |
+| `000000445187_3686`, Dice 0.0000 | <img src="practicum_work/supplementary/viz/predictions/07_final_test_selected_model/worst/04_000000445187_3686.png" width="720" alt="Ошибка предсказания 4"> |
+| `000000476276_4024`, Dice 0.0000 | <img src="practicum_work/supplementary/viz/predictions/07_final_test_selected_model/worst/05_000000476276_4024.png" width="720" alt="Ошибка предсказания 5"> |
+
+Во всех пяти худших случаях модель в основном локализует правильный силуэт,
+но меняет семантический класс cat ↔ dog, поэтому foreground Dice нужного
+класса равен нулю. Ошибки усиливаются при неоднозначном ракурсе, частичной
+окклюзии, слабом контрасте или малом количестве породоспецифичных деталей.
+Это именно ошибка распознавания класса, а не только сегментации границы.
+
+### Возможности для улучшения
+
+1. Добавить class-balanced sampling и больше сложных примеров пород/ракурсов,
+   на которых cat и dog визуально похожи; предварительно провести повторный
+   аудит их разметки.
+2. Проверить auxiliary classification/contrastive objective на глобальных
+   признаках изображения, чтобы отделить ошибку класса от ошибки контура.
+3. Проверить более крупный encoder или ансамбль нескольких seed, выбирая
+   решение только по validation foreground и worst-class Dice.
+4. Настроить crop/scale policy на маленькие объекты и добавить
+   object-aware crops, не используя test для подбора.
+
+## Этап 5. Документация кода
+
+```text
+practicum_work
+├── configs
+│   ├── _base_
+│   │   ├── dataset.py                — датасет, классы, dataloader и TTA
+│   │   └── runtime.py                — seed, scheduler, hooks и early stopping
+│   ├── baseline_fcn_r50.py           — стартовая гипотеза FCN-R50
+│   ├── baseline_segformer_mitb0.py   — стартовая гипотеза MiT-B0
+│   ├── exp01_mitb0_ce_dice.py        — CE + DiceLoss
+│   ├── exp02_mitb0_strong_aug.py     — усиленные аугментации
+│   ├── exp03_mitb2_strong_aug.py     — MiT-B2
+│   ├── exp04_mitb2_tta.py            — выбранная ветка TTA
+│   ├── exp04_mitb2_long_finetune.py  — не запущенная fallback-ветка
+│   └── final_test_mitb2.py           — финальный one-shot test
+├── environment
+│   ├── Dockerfile                    — изолированное CUDA-окружение
+│   └── versions.txt                  — зафиксированные версии
+├── src
+│   ├── data
+│   │   ├── audit_dataset.py          — аудит, EDA, утечки и PNG/CSV/JSON
+│   │   ├── clean_dataset.py          — удаление 5 пар и слияние дубликата
+│   │   └── visualize_augmentations.py— визуализация train pipeline
+│   ├── analysis
+│   │   ├── run_evaluation.py         — mmseg val/test и выгрузка PNG
+│   │   ├── evaluate_predictions.py   — независимые Dice/IoU/confusion
+│   │   ├── render_predictions.py     — лучшие/худшие панели
+│   │   ├── plot_training_curves.py   — кривые из mmengine scalars
+│   │   ├── compare_experiments.py    — validation-only ранжирование
+│   │   ├── publish_clearml_results.py— метрики и provenance в ClearML
+│   │   └── checkpoint_chunks.py      — split/join с SHA-256-проверкой
+│   └── smoke_test.py                 — CUDA/import/config/backward/ClearML
+├── supplementary
+│   └── viz                          — EDA, аугментации, кривые, prediction
+├── results
+│   ├── comparison                   — итоговое validation-ранжирование
+│   ├── *_metrics.json               — независимые метрики запусков
+│   ├── experiments.json             — task ID, URL, config и git SHA
+│   └── best_checkpoint_manifest.json
+└── tests
+    └── test_data_pipeline.py         — чистка, метрики и tie-break
+```
+
+### Основные команды
+
+Очистка и повторный EDA:
+
+```bash
+python -m practicum_work.src.data.clean_dataset
+python -m practicum_work.src.data.audit_dataset
+python -m unittest practicum_work.tests.test_data_pipeline -v
+```
+
+Сборка окружения:
+
+```bash
+docker build \
+  -f practicum_work/environment/Dockerfile \
+  -t sprint6-mmseg:0c62744 .
+```
+
+Пример безопасного запуска контейнера на сервере:
+
+```bash
+docker run --rm --gpus '"device=0"' \
+  --cpus 16 --memory 48g --shm-size 8g \
+  --env-file /opt/prak/project6/.secrets/clearml.env \
+  -v /opt/prak/project6/repo:/workspace/repo \
+  -w /workspace/repo \
+  sprint6-mmseg:0c62744 \
+  python tools/train.py practicum_work/configs/exp03_mitb2_strong_aug.py
+```
+
+Test-команда не является частью перебора: она запускается только для
+зафиксированного validation-победителя через
+[`run_evaluation.py`](practicum_work/src/analysis/run_evaluation.py) с
+`--split test --tta`.
+
+### Что не входит в репозиторий
+
+В Git и итоговый архив намеренно не включены исходный/очищенный dataset,
+Docker layers, Python-окружения, ClearML credentials, raw PNG-предсказания,
+логи, промежуточные checkpoints и полный `.pth`. Код, resolved-наследование
+конфигов, итоговые JSON/CSV, графики и report-панели находятся в
+репозитории. Временные ClearML credentials после публикации отозваны.

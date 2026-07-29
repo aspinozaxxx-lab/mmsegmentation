@@ -1,0 +1,79 @@
+{
+  "selection_split": "validation",
+  "tie_threshold": 0.001,
+  "selected": "06 MiT-B2 TTA",
+  "experiments": [
+    {
+      "rank": 1,
+      "name": "06 MiT-B2 TTA",
+      "config": "practicum_work/configs/exp04_mitb2_tta.py",
+      "metrics_path": "practicum_work/results/06_exp_mitb2_tta_val_metrics.json",
+      "mdice": 0.9365333896138727,
+      "foreground_mdice": 0.9094688844488118,
+      "worst_foreground_dice": 0.8914663660930652,
+      "background_dice": 0.9906623999439944,
+      "cat_dice": 0.9274714028045584,
+      "dog_dice": 0.8914663660930652
+    },
+    {
+      "rank": 2,
+      "name": "05 MiT-B2 strong aug",
+      "config": "practicum_work/configs/exp03_mitb2_strong_aug.py",
+      "metrics_path": "practicum_work/results/05_exp_mitb2_strong_aug_val_metrics.json",
+      "mdice": 0.9327778252407093,
+      "foreground_mdice": 0.9042216617759269,
+      "worst_foreground_dice": 0.8869782060127063,
+      "background_dice": 0.9898901521702739,
+      "cat_dice": 0.9214651175391475,
+      "dog_dice": 0.8869782060127063
+    },
+    {
+      "rank": 3,
+      "name": "01 FCN-R50",
+      "config": "practicum_work/configs/baseline_fcn_r50.py",
+      "metrics_path": "practicum_work/results/01_baseline_fcn_r50_val_metrics.json",
+      "mdice": 0.897369320257081,
+      "foreground_mdice": 0.8528067573569766,
+      "worst_foreground_dice": 0.8237720505740908,
+      "background_dice": 0.9864944460572896,
+      "cat_dice": 0.8818414641398626,
+      "dog_dice": 0.8237720505740908
+    },
+    {
+      "rank": 4,
+      "name": "04 MiT-B0 strong aug",
+      "config": "practicum_work/configs/exp02_mitb0_strong_aug.py",
+      "metrics_path": "practicum_work/results/04_exp_mitb0_strong_aug_val_metrics.json",
+      "mdice": 0.8836403636532336,
+      "foreground_mdice": 0.8327282201400301,
+      "worst_foreground_dice": 0.7870236112782002,
+      "background_dice": 0.985464650679641,
+      "cat_dice": 0.8784328290018599,
+      "dog_dice": 0.7870236112782002
+    },
+    {
+      "rank": 5,
+      "name": "03 MiT-B0 CE+Dice",
+      "config": "practicum_work/configs/exp01_mitb0_ce_dice.py",
+      "metrics_path": "practicum_work/results/03_exp_mitb0_ce_dice_val_metrics.json",
+      "mdice": 0.8765227387332736,
+      "foreground_mdice": 0.8221862815780059,
+      "worst_foreground_dice": 0.7872262802542741,
+      "background_dice": 0.9851956530438087,
+      "cat_dice": 0.8571462829017377,
+      "dog_dice": 0.7872262802542741
+    },
+    {
+      "rank": 6,
+      "name": "02 MiT-B0 CE",
+      "config": "practicum_work/configs/baseline_segformer_mitb0.py",
+      "metrics_path": "practicum_work/results/02_baseline_segformer_mitb0_val_metrics.json",
+      "mdice": 0.8736972142195908,
+      "foreground_mdice": 0.8182844909124201,
+      "worst_foreground_dice": 0.7840834942946647,
+      "background_dice": 0.984522660833932,
+      "cat_dice": 0.8524854875301754,
+      "dog_dice": 0.7840834942946647
+    }
+  ]
+}

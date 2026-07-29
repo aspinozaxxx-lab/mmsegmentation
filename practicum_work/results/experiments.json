@@ -1,0 +1,95 @@
+{
+  "schema_version": 1,
+  "project": "Practicum/Sprint6-mmsegmentation",
+  "repository": "https://github.com/aspinozaxxx-lab/mmsegmentation",
+  "upstream_start_sha": "b040e147adfa027bbc071b624bedf0ae84dfc922",
+  "selection_split": "validation",
+  "selected_experiment": "06_exp_mitb2_tta",
+  "test_evaluations": 1,
+  "experiments": [
+    {
+      "name": "01_baseline_fcn_r50",
+      "kind": "baseline",
+      "split": "validation",
+      "config": "practicum_work/configs/baseline_fcn_r50.py",
+      "metrics": "practicum_work/results/01_baseline_fcn_r50_val_metrics.json",
+      "git_sha": "2e07308d0a228eb0912ce6da653ff937c6b9a729",
+      "clearml_task_id": "9c5c881e6be1494ea39b28669d8f4b22",
+      "clearml_share_url": "https://app.clear.ml/projects/e46e637ae0f148c68f125b69cec89660/experiments/9c5c881e6be1494ea39b28669d8f4b22/output/execution",
+      "checkpoint_iteration": 5500,
+      "mDice": 0.897369320257081
+    },
+    {
+      "name": "02_baseline_segformer_mitb0",
+      "kind": "baseline",
+      "split": "validation",
+      "config": "practicum_work/configs/baseline_segformer_mitb0.py",
+      "metrics": "practicum_work/results/02_baseline_segformer_mitb0_val_metrics.json",
+      "git_sha": "595a1e2eab2a9c4b2ba132628e2f262f4f7894b1",
+      "clearml_task_id": "680a7ce5e4ca4a5da95f7bbc650984f9",
+      "clearml_share_url": "https://app.clear.ml/projects/e46e637ae0f148c68f125b69cec89660/experiments/680a7ce5e4ca4a5da95f7bbc650984f9/output/execution",
+      "checkpoint_iteration": 1750,
+      "mDice": 0.8736972142195908
+    },
+    {
+      "name": "03_exp_mitb0_ce_dice",
+      "kind": "experiment",
+      "split": "validation",
+      "config": "practicum_work/configs/exp01_mitb0_ce_dice.py",
+      "metrics": "practicum_work/results/03_exp_mitb0_ce_dice_val_metrics.json",
+      "git_sha": "dcd5f320c94c9cc41531587edf1a8aa7287aebbc",
+      "clearml_task_id": "1a9bd8d1ed7243e5a39e85f2394bd59b",
+      "clearml_share_url": "https://app.clear.ml/projects/e46e637ae0f148c68f125b69cec89660/experiments/1a9bd8d1ed7243e5a39e85f2394bd59b/output/execution",
+      "checkpoint_iteration": 3500,
+      "mDice": 0.8765227387332736
+    },
+    {
+      "name": "04_exp_mitb0_strong_aug",
+      "kind": "experiment",
+      "split": "validation",
+      "config": "practicum_work/configs/exp02_mitb0_strong_aug.py",
+      "metrics": "practicum_work/results/04_exp_mitb0_strong_aug_val_metrics.json",
+      "git_sha": "dcd5f320c94c9cc41531587edf1a8aa7287aebbc",
+      "clearml_task_id": "5ad50799efd44780a30b0bc68b1c1761",
+      "clearml_share_url": "https://app.clear.ml/projects/e46e637ae0f148c68f125b69cec89660/experiments/5ad50799efd44780a30b0bc68b1c1761/output/execution",
+      "checkpoint_iteration": 3250,
+      "mDice": 0.8836403636532336
+    },
+    {
+      "name": "05_exp_mitb2_strong_aug",
+      "kind": "experiment",
+      "split": "validation",
+      "config": "practicum_work/configs/exp03_mitb2_strong_aug.py",
+      "metrics": "practicum_work/results/05_exp_mitb2_strong_aug_val_metrics.json",
+      "git_sha": "b8d3f480fe684f0b464dd8ddd5f70a2f7ba2b46a",
+      "clearml_task_id": "5de076f4c4e74b7aab33dec7074ba33a",
+      "clearml_share_url": "https://app.clear.ml/projects/e46e637ae0f148c68f125b69cec89660/experiments/5de076f4c4e74b7aab33dec7074ba33a/output/execution",
+      "checkpoint_iteration": 3750,
+      "mDice": 0.9327778252407093
+    },
+    {
+      "name": "06_exp_mitb2_tta",
+      "kind": "experiment",
+      "split": "validation",
+      "config": "practicum_work/configs/exp04_mitb2_tta.py",
+      "metrics": "practicum_work/results/06_exp_mitb2_tta_val_metrics.json",
+      "git_sha": "3a9ac618d96b2f68d4957db9d47b9bb35916de04",
+      "clearml_task_id": "3be5d8852d0649ed8d6b26a0861019be",
+      "clearml_share_url": "https://app.clear.ml/projects/e46e637ae0f148c68f125b69cec89660/experiments/3be5d8852d0649ed8d6b26a0861019be/output/execution",
+      "checkpoint_iteration": 3750,
+      "mDice": 0.9365333896138727
+    },
+    {
+      "name": "07_final_test_selected_model",
+      "kind": "final_test",
+      "split": "test",
+      "config": "practicum_work/configs/final_test_mitb2.py",
+      "metrics": "practicum_work/results/07_final_test_selected_model_test_metrics.json",
+      "git_sha": "cfc31eee46a86d8d9d985837649eb06fd43a08e3",
+      "clearml_task_id": "f6f3773d25bf40248e73b450f8472609",
+      "clearml_share_url": "https://app.clear.ml/projects/e46e637ae0f148c68f125b69cec89660/experiments/f6f3773d25bf40248e73b450f8472609/output/execution",
+      "checkpoint_iteration": 3750,
+      "mDice": 0.9216629060071923
+    }
+  ]
+}
