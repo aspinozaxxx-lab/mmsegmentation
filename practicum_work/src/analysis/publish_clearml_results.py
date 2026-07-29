@@ -66,6 +66,7 @@ def publish(
         name=f"{split}_independent_metrics",
         artifact_object=metrics_path,
         wait_on_upload=True,
+        retries=5,
     )
     for name, path in artifacts:
         if not path.exists():
@@ -74,6 +75,7 @@ def publish(
             name=name,
             artifact_object=path,
             wait_on_upload=True,
+            retries=5,
         )
     task.flush(wait_for_uploads=False)
     if mark_completed or was_completed:
