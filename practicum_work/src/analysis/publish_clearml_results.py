@@ -65,12 +65,17 @@ def publish(
     task.upload_artifact(
         name=f"{split}_independent_metrics",
         artifact_object=metrics_path,
+        wait_on_upload=True,
     )
     for name, path in artifacts:
         if not path.exists():
             raise FileNotFoundError(path)
-        task.upload_artifact(name=name, artifact_object=path)
-    task.flush(wait_for_uploads=True)
+        task.upload_artifact(
+            name=name,
+            artifact_object=path,
+            wait_on_upload=True,
+        )
+    task.flush(wait_for_uploads=False)
     if mark_completed or was_completed:
         task.mark_completed()
 
