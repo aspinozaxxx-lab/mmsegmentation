@@ -25,6 +25,7 @@ def publish(
     split: str,
     metrics_path: Path,
     artifacts: list[tuple[str, Path]],
+    mark_completed: bool,
 ) -> None:
     metrics = json.loads(metrics_path.read_text(encoding="utf-8"))
     task = Task.get_task(task_id=task_id)
@@ -67,6 +68,8 @@ def publish(
             raise FileNotFoundError(path)
         task.upload_artifact(name=name, artifact_object=path)
     task.flush(wait_for_uploads=True)
+    if mark_completed:
+        task.mark_completed()
 
 
 def parse_args() -> argparse.Namespace:
@@ -82,6 +85,7 @@ def parse_args() -> argparse.Namespace:
         default=[],
         help="NAME=PATH; repeat for additional CSV/PNG artifacts",
     )
+    parser.add_argument("--mark-completed", action="store_true")
     return parser.parse_args()
 
 
@@ -94,6 +98,7 @@ def main() -> None:
         split=args.split,
         metrics_path=args.metrics,
         artifacts=[parse_artifact(spec) for spec in args.artifact],
+        mark_completed=args.mark_completed,
     )
     print(
         json.dumps(
